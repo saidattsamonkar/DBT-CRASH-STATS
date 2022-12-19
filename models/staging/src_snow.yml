@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: snow
+    database: DBT_CRASH
+    schema: DBT
+    tables:
+      - name: nyc_mv_collision_persons
+      - name: nyc_mv_collision_crashes
+      - name: nyc_mv_collision_vehicles
