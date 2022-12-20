@@ -16,7 +16,10 @@ with dim_table as(
         when borough = 'STATEN ISLAND' then '5'
         else '6'
     end
-    ) as boro_code
+    ) as boro_code,
+
+    '{{invocation_id}}' as jobId,
+    current_timestamp() as DI_Create_Date_Name
     
     from (
     select distinct borough
