@@ -1,19 +1,19 @@
 with dim_table as(
 
     select row_number() over (order by borough) as borough_sk, 
-
+    
     (case
-        when borough IS NULL then 'UNDEFINED'
-        else upper(borough)
+        when borough IS NULL then 'unknown'
+        else lower(borough)
     end
     ) as borough,
 
     (case
-        when borough = 'MANHATTAN' then '1'
-        when borough = 'BRONX' then '2'
-        when borough = 'BROOKLYN' then '3'
-        when borough = 'QUEENS' then '4'
-        when borough = 'STATEN ISLAND' then '5'
+        when lower(borough) = 'manhattan' then '1'
+        when lower(borough) = 'bronx' then '2'
+        when lower(borough) = 'brooklyn' then '3'
+        when lower(borough) = 'queens' then '4'
+        when lower(borough) = 'staten island' then '5'
         else '6'
     end
     ) as boro_code,
@@ -27,7 +27,9 @@ with dim_table as(
     ) 
 
 )
+
 select * from dim_table
+order by borough_sk
 
 
 
