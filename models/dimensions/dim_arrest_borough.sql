@@ -1,9 +1,9 @@
 with dim_table as(
 
     select row_number() over (order by borough) as borough_sk, 
-
+    
     (case
-        when borough IS NULL then 'UNDEFINED'
+        when borough IS NULL then 'UNKNOWN'
         else upper(borough)
     end
     ) as borough,
@@ -27,7 +27,9 @@ with dim_table as(
     ) 
 
 )
+
 select * from dim_table
+order by borough_sk
 
 
 
