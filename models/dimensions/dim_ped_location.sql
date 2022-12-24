@@ -1,20 +1,20 @@
 with dim_table as(
 
-    select row_number() over (order by complaint) as complaint_sk, 
+    select row_number() over (order by ped_location) as ped_location_sk, 
     
-    lower(complaint) as complaint,
+     lower(ped_location) as ped_location,
 
     '{{invocation_id}}' as jobId,
     current_timestamp() as DI_Create_Date_Name
     
     from (
-        select distinct complaint
+        select distinct ped_location
         from {{ ref('stg_nyc_mv_collision_persons') }}
     ) 
 
-    where NOT complaint IS NULL
+    where ped_location IS NOT NULL
 
 )
 
 select * from dim_table
-order by complaint_sk
+order by ped_location_sk
