@@ -1,6 +1,7 @@
 with stg_table as(
 
     select *,
+    
     '{{invocation_id}}' as jobId,
     current_timestamp() as DI_Create_Date_Name
     
