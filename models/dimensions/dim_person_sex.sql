@@ -2,7 +2,7 @@ with dim_table as(
 
     select row_number() over (order by person_sex) as person_sex_sk, 
     
-    upper(person_sex),
+    person_sex,
 
     '{{invocation_id}}' as jobId,
     current_timestamp() as DI_Create_Date_Name

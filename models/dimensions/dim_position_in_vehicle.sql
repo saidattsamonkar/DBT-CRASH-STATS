@@ -2,7 +2,7 @@ with dim_table as(
 
     select row_number() over (order by position_in_vehicle) as position_in_vehicle_sk, 
     
-    lower(position_in_vehicle),
+    position_in_vehicle,
 
     '{{invocation_id}}' as jobId,
     current_timestamp() as DI_Create_Date_Name

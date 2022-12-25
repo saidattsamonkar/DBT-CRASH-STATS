@@ -2,7 +2,7 @@ with dim_table as(
 
     select row_number() over (order by safety_equipment) as safety_equipment_sk, 
     
-    lower(safety_equipment) as safety_equipment,
+    safety_equipment,
 
     '{{invocation_id}}' as jobId,
     current_timestamp() as DI_Create_Date_Name

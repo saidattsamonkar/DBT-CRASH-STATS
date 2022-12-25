@@ -1,6 +1,6 @@
 
 
-dim_table as(
+with dim_table as(
 
     select row_number() over (order by vehicle_make) as vehicle_make_sk, 
     
