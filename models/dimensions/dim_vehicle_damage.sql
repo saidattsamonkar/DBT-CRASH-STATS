@@ -1,4 +1,23 @@
-with dim_table as(
+with vehicles as(
+
+    select *  from {{ ref('stg_nyc_mv_collision_vehicles') }}
+
+),
+
+temp as(
+
+    (select vehicle_damage from vehicles)
+    UNION
+    (select vehicle_damage_1 from vehicles)
+    UNION
+    (select vehicle_damage_2 from vehicles)
+    UNION
+    (select vehicle_damage_3 from vehicles)
+    
+),
+
+
+dim_table as(
 
     select row_number() over (order by vehicle_damage) as vehicle_damage_sk, 
     
@@ -12,7 +31,7 @@ with dim_table as(
     
     from (
         select distinct vehicle_damage
-        from {{ ref('stg_nyc_mv_collision_vehicles') }}
+        from temp
     ) 
 )
 
