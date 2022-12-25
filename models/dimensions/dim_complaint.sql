@@ -2,7 +2,7 @@ with dim_table as(
 
     select row_number() over (order by complaint) as complaint_sk, 
     
-    lower(complaint) as complaint,
+    complaint,
 
     '{{invocation_id}}' as jobId,
     current_timestamp() as DI_Create_Date_Name

@@ -2,7 +2,7 @@ with dim_table as(
 
     select row_number() over (order by emotional_status) as emotional_status_sk, 
     
-     lower(emotional_status) as emotional_status,
+    emotional_status,
 
     '{{invocation_id}}' as jobId,
     current_timestamp() as DI_Create_Date_Name

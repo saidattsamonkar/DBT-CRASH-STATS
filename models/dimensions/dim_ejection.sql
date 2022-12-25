@@ -2,7 +2,7 @@ with dim_table as(
 
     select row_number() over (order by ejection) as ejection_sk, 
     
-     lower(ejection) as ejection,
+    ejection,
 
     '{{invocation_id}}' as jobId,
     current_timestamp() as DI_Create_Date_Name

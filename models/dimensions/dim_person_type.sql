@@ -4,7 +4,7 @@ with
         select
             row_number() over (order by person_type) as person_type_sk,
 
-            lower(person_type),
+            person_type,
 
             '{{invocation_id}}' as jobid,
             current_timestamp() as di_create_date_name

@@ -3,8 +3,8 @@ with dim_table as(
     select row_number() over (order by ped_role) as ped_role_sk, 
     
     (case
-        when ped_role IS NULL then 'unknown'
-        else lower(ped_role)
+        when ped_role IS NULL then 'Unknown'
+        else ped_role
     end
     ) as ped_role,
 
