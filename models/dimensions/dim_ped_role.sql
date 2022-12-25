@@ -15,7 +15,7 @@ with dim_table as(
         select distinct ped_role
         from {{ ref('stg_nyc_mv_collision_persons') }}
     ) 
-
+    
 )
 
 select * from dim_table
