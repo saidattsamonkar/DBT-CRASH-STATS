@@ -159,3 +159,4 @@ final as(
 )
 
 select * from final
+order by unique_id

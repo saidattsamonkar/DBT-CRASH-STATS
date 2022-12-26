@@ -3,8 +3,8 @@ with dim_table as(
     select row_number() over (order by point_of_impact) as point_of_impact_sk, 
     
     (case
-        when point_of_impact is NULL then 'unknown'
-        else lower(point_of_impact)
+        when point_of_impact is NULL then 'Unknown'
+        else point_of_impact
     end) as point_of_impact,
 
     '{{invocation_id}}' as jobId,

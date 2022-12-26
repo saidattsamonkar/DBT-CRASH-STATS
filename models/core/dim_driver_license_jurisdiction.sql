@@ -6,8 +6,9 @@ with temp_table as(
             'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 
             'UM', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY', 'NL', 'PE', 'NS', 'NB', 'QC', 'ON', 'MB', 'SK', 'AB',
             'BC', 'YT', 'NT', 'NU') then upper(driver_license_jurisdiction) 
-        else 'UNKNOWN'
+        else 'ZZ'
         end) as driver_license_jurisdiction
+        
     from {{ ref('stg_nyc_mv_collision_vehicles') }}
 ),
 
