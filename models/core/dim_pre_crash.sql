@@ -3,8 +3,8 @@ with dim_table as(
     select row_number() over (order by pre_crash) as pre_crash_sk, 
     
     (case
-    when pre_crash is NULL then 'unknown'
-    else lower(pre_crash)
+    when pre_crash is NULL then 'Unknown'
+    else pre_crash
     end) as pre_crash,
 
     '{{invocation_id}}' as jobId,

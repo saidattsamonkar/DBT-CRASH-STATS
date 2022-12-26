@@ -2,12 +2,12 @@ with temp_table as (
 
     select 
     (case
-        when travel_direction = 'S' then 'south'
-        when travel_direction = 'E' then 'east'
-        when travel_direction = 'W' then 'west'
-        when travel_direction = 'N' then 'north'
-        when travel_direction is NULL or travel_direction = '-' or travel_direction = 'U' then 'unknown'
-        else lower(travel_direction)
+        when travel_direction = 'S' then 'South'
+        when travel_direction = 'E' then 'East'
+        when travel_direction = 'W' then 'West'
+        when travel_direction = 'N' then 'North'
+        when travel_direction is NULL or travel_direction = '-' or travel_direction = 'U' then 'Unknown'
+        else travel_direction
     end) as travel_direction
 
     from {{ ref('stg_nyc_mv_collision_vehicles') }}

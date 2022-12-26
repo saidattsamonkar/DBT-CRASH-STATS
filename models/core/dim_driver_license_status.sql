@@ -3,8 +3,8 @@ with dim_table as(
     select row_number() over (order by driver_license_status) as driver_license_status_sk, 
     
     (case
-        when driver_license_status IS NULL then 'unknown'
-        else lower(driver_license_status)
+        when driver_license_status IS NULL then 'Unknown'
+        else driver_license_status
     end
     ) as driver_license_status,
 
