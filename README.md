@@ -1,5 +1,7 @@
 Welcome to your new dbt project!
 
+![DAG](https://github.com/saidattsamonkar/DBT-CRASH-STATS/blob/main/DBT_SC.png)
+
 ### Using the starter project
 
 Try running the following commands:
