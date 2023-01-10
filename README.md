@@ -1,4 +1,4 @@
-Welcome to your new dbt project!
+## NYC Collisions Dimensional Model using DBT, Snowflake and AWS
 
 ![DAG](https://github.com/saidattsamonkar/DBT-CRASH-STATS/blob/main/DBT_SC.png)
 
