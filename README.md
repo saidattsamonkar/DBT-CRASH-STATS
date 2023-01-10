@@ -57,7 +57,7 @@ CREATE PIPE my_pipe
 AUTO_INGEST = TRUE
 AS 
 BEGIN;
-COPY INTO nyc_collisions_crashes
+COPY INTO nyc_mv_collision_crashes
 FROM @my_stage/Crashes.json
 FILE_FORMAT = (TYPE = 'JSON' NULL_IF = ('""'))
 ON_ERROR = 'CONTINUE';
@@ -70,3 +70,15 @@ Then we run the ```RESUME``` command to start the Snow Pipe
 Now we can use DBT to transform the data in the snowflake tables and create a dimensional model either as a materialized view or a table. The steps are:
 - Set up a connection to Snowflake either through Snowflake partner connect or setting up a connection from inside DBT
 - Configure a ```.yml``` file to set the tables as sources
+```
+version: 2
+sources:
+  - name: snow
+    database: DBT_CRASH
+    schema: DBT
+    tables:
+      - name: nyc_mv_collision_persons
+      - name: nyc_mv_collision_crashes
+      - name: nyc_mv_collision_vehicles
+```
+- Set up 3 Staging tables from the three source tables. example 
