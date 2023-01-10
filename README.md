@@ -6,7 +6,7 @@ The aim of this project is to build a Dimensional Model for NYC vehicle collisio
 
 Python and AWS S3 storage service is used to load data into Snowflake. Then we use DBT on top of Snowflake to help us with the transformations.The resulting dimesional model has 26 dimensions and 7 fact tables
 
-### Final DBT Project DAG
+## Final DBT Project DAG
 ![DAG](https://github.com/saidattsamonkar/DBT-CRASH-STATS/blob/main/DBT_SC.png)
 
 ## Step 1 - Data Extraction
