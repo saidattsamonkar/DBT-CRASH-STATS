@@ -39,14 +39,18 @@ for key in api_urls.keys():
     s3.put_object(Bucket=bucket_name, Key=key+'.json', Body=json.dumps(data))
 ```
 
-Try running the following commands:
-- dbt run
-- dbt test
-
-
-### Resources:
+## Step 2 - Set up CRON job
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](http://community.getbdt.com/) to learn from other analytics engineers
+
+## Step 3 - Load Data to SnowFlake
+- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+
+## Step 4 - Set up Snowpipe
+- Find [dbt events](https://events.getdbt.com) near you
+- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+
+## Step 5 - Transform using DBT
 - Find [dbt events](https://events.getdbt.com) near you
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
