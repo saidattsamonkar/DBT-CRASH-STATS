@@ -64,6 +64,7 @@ ON_ERROR = 'CONTINUE';
 REMOVE @my_stage/Crashes.json;
 COMMIT;
 ```
+Then we run the ```RESUME``` command to start the Snow Pipe
 
 ## Step 5 - Transform using DBT
 Now we can use DBT to transform the data in the snowflake tables and create a dimensional model either as a materialized view or a table. The steps are:
