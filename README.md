@@ -1,4 +1,4 @@
-# NYC Collisions Dimensional Model using DBT, Snowflake and AWS
+# ELT pipeline for NYC Collisions Dimensional Model using DBT, Snowflake and AWS
 
 
 ### Final DBT Project DAG
