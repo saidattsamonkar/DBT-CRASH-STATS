@@ -42,19 +42,44 @@ for key in api_urls.keys():
 ## Step 2 - Set up CRON job
 We use AWS EventBridge to periodically run a Lambda function containing the python code
 
-## Step 3 - Load Data to SnowFlake
+## Step 3 - Set up SnowFlake external table
 First we set up the s3 bucket as an external stage in Snowflake
 ```
 CREATE STAGE my_stage
 URL = 's3://nyc-collisions'
 CREDENTIALS = (AWS_KEY_ID='my_access_key' AWS_SECRET_KEY='my_secret_key');
 ```
-Now we can use COPY INTO command to load files to our Snowflake internal tables
-
 
 ## Step 4 - Set up Snowpipe
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+First we need to set up Snow Pipe to run COPY INTO command to load files to our Snowflake internal tables and delete the file from our external table
+```
+CREATE PIPE my_pipe
+AUTO_INGEST = TRUE
+AS 
+BEGIN;
+COPY INTO nyc_collisions_crashes
+FROM @my_stage/Crashes.json
+FILE_FORMAT = (TYPE = 'JSON' NULL_IF = ('""'))
+ON_ERROR = 'CONTINUE';
+REMOVE @my_stage/Crashes.json;
+COMMIT;
+```
+
+Then we set up a task to check for new files in our Snowflake external stage
+
+```
+CREATE TASK my_task
+  WAREHOUSE = my_warehouse
+  SCHEDULE = '5 minutes'
+  AS
+    BEGIN;
+    IF EXISTS (SELECT 1 FROM table(INFORMATION_SCHEMA.FILES) WHERE file_name = 'Crashes.json' and stage_name = 'my_stage') 
+    THEN
+      ALTER PIPE my_pipe RESUME; 
+      REMOVE @my_stage/Crashes.json;
+    END IF;
+    COMMIT;
+```
 
 ## Step 5 - Transform using DBT
 - Find [dbt events](https://events.getdbt.com) near you
