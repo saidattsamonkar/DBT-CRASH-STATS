@@ -40,12 +40,17 @@ for key in api_urls.keys():
 ```
 
 ## Step 2 - Set up CRON job
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+We use AWS EventBridge to periodically run a Lambda function containing the python code
 
 ## Step 3 - Load Data to SnowFlake
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+First we set up the s3 bucket as an external stage in Snowflake
+```
+CREATE STAGE my_stage
+URL = 's3://nyc-collisions'
+CREDENTIALS = (AWS_KEY_ID='my_access_key' AWS_SECRET_KEY='my_secret_key');
+```
+Now we can use COPY INTO command to load files to our Snowflake internal tables
+
 
 ## Step 4 - Set up Snowpipe
 - Find [dbt events](https://events.getdbt.com) near you
