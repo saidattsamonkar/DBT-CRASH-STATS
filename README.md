@@ -51,7 +51,7 @@ CREDENTIALS = (AWS_KEY_ID='my_access_key' AWS_SECRET_KEY='my_secret_key');
 ```
 
 ## Step 4 - Set up Snowpipe
-First we need to set up Snow Pipe to run COPY INTO command to load files to our Snowflake internal tables and delete the file from our external table
+We set up Snow Pipe to run COPY INTO command to load files to our Snowflake internal tables and delete the file from our external table using:
 ```
 CREATE PIPE my_pipe
 AUTO_INGEST = TRUE
@@ -65,22 +65,7 @@ REMOVE @my_stage/Crashes.json;
 COMMIT;
 ```
 
-Then we set up a task to check for new files in our Snowflake external stage
-
-```
-CREATE TASK my_task
-  WAREHOUSE = my_warehouse
-  SCHEDULE = '5 minutes'
-  AS
-    BEGIN;
-    IF EXISTS (SELECT 1 FROM table(INFORMATION_SCHEMA.FILES) WHERE file_name = 'Crashes.json' and stage_name = 'my_stage') 
-    THEN
-      ALTER PIPE my_pipe RESUME; 
-      REMOVE @my_stage/Crashes.json;
-    END IF;
-    COMMIT;
-```
-
 ## Step 5 - Transform using DBT
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+Now we can use DBT to transform the data in the snowflake tables and create a dimensional model either as a materialized view or a table. The steps are:
+- Set up a connection to Snowflake either through Snowflake partner connect or setting up a connection from inside DBT
+- Configure a ```.yml``` file to set the tables as sources
