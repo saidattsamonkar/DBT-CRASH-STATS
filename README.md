@@ -17,24 +17,26 @@ import requests
 import boto3
 import json
 
-# URLs of the APIs to fetch data from
-api_urls = ['https://www.aaa.com', 'https://www.bbb.com', 'https://www.ccc.com']
+# List of api paths
+api_urls = {'Crahes':'https://data.cityofnewyork.us/resource/h9gi-nx95.json',
+            'Person':'https://data.cityofnewyork.us/resource/f55k-p6yu.json',
+            'Vehicles':'https://data.cityofnewyork.us/resource/bm4k-52h4.json'}
 
-# S3 bucket name
-bucket_name = 'nyc-collisions-a'
+bucket_name = 'nyc-collisions'
 
-# Create an S3 client
-s3 = boto3.client('s3, aws_access_key_id='ACCESS_KEY_ID', aws_secret_access_key='SECRET_ACCESS_KEY')
+# Create S3 client
+s3 = boto3.client('s3', aws_access_key_id='ACCESS_KEY_ID', aws_secret_access_key='SECRET_ACCESS_KEY')
 
-for url in api_urls:
+for key in api_urls.keys():
+
     # Make the API request
-    response = requests.get(url)
+    response = requests.get(api_urls[key])
+    
     # Parse the JSON data
     data = json.loads(response.text)
-    # Create a unique key for the JSON data
-    key = url.split('/')[-1] + '.json'
+    
     # Upload the JSON data to the S3 bucket
-    s3.put_object(Bucket=bucket_name, Key=key, Body=json.dumps(data))
+    s3.put_object(Bucket=bucket_name, Key=key+'.json', Body=json.dumps(data))
 ```
 
 Try running the following commands:
