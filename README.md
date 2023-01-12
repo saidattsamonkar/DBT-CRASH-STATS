@@ -1,6 +1,6 @@
 # ELT pipeline for NYC Collisions Dimensional Model using DBT, Snowflake and AWS
 
-##Introduction
+## Introduction
 The aim of this project is to build a Dimensional Model for NYC vehicle collisions dataset available on NYC OpenData. We Use 3 Datasets:
 - Motor Vehicle Collisions - Crashes (https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95)
 - Motor Vehicle Collisions - Person (https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Person/f55k-p6yu)
