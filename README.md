@@ -89,7 +89,7 @@ with stg_table as (
 
     select 
     
-    unique_key as COLLISION_ID,
+    unique_key as collision_id,
     crash_date as collision_day,
     crash_time as collision_time,
     cast(extract(hour from crash_time) as int) as collision_hour,
