@@ -53,20 +53,7 @@ CREDENTIALS = (AWS_KEY_ID='my_access_key' AWS_SECRET_KEY='my_secret_key');
 ```
 
 ## Step 4 - Set up Snowpipe
-We set up Snow Pipe to run COPY INTO command to load files to our Snowflake internal tables and delete the file from our external table using:
-```
-CREATE PIPE my_pipe
-AUTO_INGEST = TRUE
-AS 
-BEGIN;
-COPY INTO nyc_mv_collision_crashes
-FROM @my_stage/Crashes.json
-FILE_FORMAT = (TYPE = 'JSON' NULL_IF = ('""'))
-ON_ERROR = 'CONTINUE';
-REMOVE @my_stage/Crashes.json;
-COMMIT;
-```
-Then we run the ```RESUME``` command to start the Snow Pipe
+We set up Snow Pipe to run COPY INTO command to load files to our Snowflake internal tables
 
 ## Step 5 - Transform using DBT
 Now we can use DBT to transform the data in the snowflake tables and create a dimensional model either as a materialized view or a table. The steps are:
